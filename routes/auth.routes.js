@@ -1,6 +1,7 @@
 import express from "express";
 import rateLimit from "express-rate-limit";
 
+import authenticateToken from "../middleware/auth.middleware.js";
 import {
   googleLogin,
   completeOnboarding,
@@ -8,15 +9,13 @@ import {
   logout,
 } from "../controllers/auth.controller.js";
 
-import authenticateToken from "../middleware/auth.middleware.js";
-
 const router = express.Router();
 
 /* ------------------------------------------------------
  * Rate Limiters
  * ------------------------------------------------------ */
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
+  windowMs: 15 * 60 * 1000, // 15 minutes
   max: 20,
   standardHeaders: true,
   legacyHeaders: false,
@@ -28,13 +27,16 @@ const strictLimiter = rateLimit({
 });
 
 /* ------------------------------------------------------
- * Routes
+ * Auth Routes
  * ------------------------------------------------------ */
 
-// Public OAuth entry
+// Google OAuth login
 router.post("/google", authLimiter, googleLogin);
 
-// Protected routes
+// Get current authenticated user
+router.get("/me", authenticateToken, getCurrentUser);
+
+// Complete onboarding
 router.post(
   "/complete-onboarding",
   strictLimiter,
@@ -42,8 +44,7 @@ router.post(
   completeOnboarding
 );
 
-router.get("/me", authenticateToken, getCurrentUser);
-
+// Logout (stateless)
 router.post("/logout", authenticateToken, logout);
 
 export default router;

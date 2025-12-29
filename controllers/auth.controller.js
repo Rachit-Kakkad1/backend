@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
-import {verifyGoogleToken} from "../utils/verifyGoogleToken.js";
+import { verifyGoogleToken } from "../utils/verifyGoogleToken.js";
 
 /**
  * ------------------------------------------------------
