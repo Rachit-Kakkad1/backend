@@ -27,12 +27,19 @@ const app = express();
  * -------------------------------------------------- */
 app.use(helmet());
 
+/**
+ * ✅ CORRECT CORS CONFIG FOR JWT AUTH
+ */
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*",
-    credentials: true,
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// Explicitly handle preflight requests
+app.options("*", cors());
 
 app.use(express.json({ limit: "200kb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -63,7 +70,7 @@ app.use("/api/dashboard", dashboardRoutes);
 /* --------------------------------------------------
  * 404 Handler
  * -------------------------------------------------- */
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({
     success: false,
     message: "API route not found",
