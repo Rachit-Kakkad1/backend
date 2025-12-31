@@ -1,11 +1,15 @@
 /**
- * Measure execution time for an operation
+ * PERFORMANCE TIMER
+ * -----------------
+ * Measures analysis execution time
  */
-export const measureTime = () => {
+
+export function measureTime() {
   const start = process.hrtime.bigint();
 
-  return () => {
+  return function stop() {
     const end = process.hrtime.bigint();
-    return Number(end - start) / 1_000_000; // milliseconds
+    const durationMs = Number(end - start) / 1_000_000;
+    return `${durationMs.toFixed(2)} ms`;
   };
-};
+}

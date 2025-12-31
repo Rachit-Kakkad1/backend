@@ -1,63 +1,71 @@
-export function generateImpactAnalysis(vulnerabilities, normalizedInput) {
-  if (!vulnerabilities || vulnerabilities.length === 0) {
-    return {
-      technicalImpact: "No exploitable technical impact detected.",
-      dataExposure: "No sensitive data exposure identified.",
-      businessImpact: "No business impact at current risk level.",
-    };
-  }
+/**
+ * IMPACT ENGINE
+ * -------------
+ * Describes potential impact of detected vulnerabilities.
+ * Descriptive only. No execution. No exploitation.
+ */
 
-  const impacts = {
-    technicalImpact: [],
-    dataExposure: [],
-    businessImpact: [],
-  };
+export function calculateImpact(vulnerabilities = []) {
+  if (!Array.isArray(vulnerabilities)) return [];
 
-  for (const vuln of vulnerabilities) {
+  return vulnerabilities.map((vuln) => {
+    const severity = vuln?.severity || "LOW";
+
     switch (vuln.type) {
       case "SQL Injection":
-        impacts.technicalImpact.push(
-          "Database queries can be manipulated by an attacker."
-        );
-        impacts.dataExposure.push(
-          "User records, credentials, or internal data may be exposed."
-        );
-        impacts.businessImpact.push(
-          "Data breach risk, regulatory penalties, and loss of user trust."
-        );
-        break;
+        return {
+          vulnerability: "SQL Injection",
+          severity,
+          impactLevel: "HIGH",
+          killChainStage: "Exploitation",
+          businessImpact:
+            "Unauthorized access, modification, or destruction of sensitive database records.",
+          technicalImpact:
+            "Manipulation of SQL query execution through unvalidated user input.",
+          likelihood:
+            "HIGH when user input is directly concatenated into queries.",
+        };
 
       case "Cross-Site Scripting (XSS)":
-        impacts.technicalImpact.push(
-          "Malicious scripts can execute in a user’s browser."
-        );
-        impacts.dataExposure.push(
-          "Session tokens or user actions may be hijacked."
-        );
-        impacts.businessImpact.push(
-          "Account compromise, phishing attacks, and brand damage."
-        );
-        break;
+        return {
+          vulnerability: "Cross-Site Scripting (XSS)",
+          severity,
+          impactLevel: "MEDIUM",
+          killChainStage: "Execution",
+          businessImpact:
+            "Session hijacking, credential theft, or reputational damage.",
+          technicalImpact:
+            "Execution of attacker-controlled scripts in a victim’s browser.",
+          likelihood:
+            "MEDIUM to HIGH depending on input exposure and output encoding.",
+        };
 
       case "Hardcoded Secret":
-        impacts.technicalImpact.push(
-          "Secrets can be extracted from source or configuration."
-        );
-        impacts.dataExposure.push("API keys or credentials may be abused.");
-        impacts.businessImpact.push(
-          "Unauthorized system access and potential financial loss."
-        );
-        break;
+        return {
+          vulnerability: "Hardcoded Secret",
+          severity,
+          impactLevel: "HIGH",
+          killChainStage: "Credential Access",
+          businessImpact:
+            "Credential reuse leading to unauthorized access to internal or third-party systems.",
+          technicalImpact:
+            "Secrets embedded in code or configuration files exposed via repositories or logs.",
+          likelihood:
+            "HIGH if secrets are committed or deployed without rotation.",
+        };
 
       default:
-        impacts.technicalImpact.push("Potential technical weakness detected.");
-        impacts.businessImpact.push("Unknown business risk.");
+        return {
+          vulnerability: vuln.type || "Unknown",
+          severity,
+          impactLevel: "LOW",
+          killChainStage: "Unknown",
+          businessImpact:
+            "Potential impact depends on how the vulnerability is exploited.",
+          technicalImpact:
+            "Technical consequences vary based on application context.",
+          likelihood: "UNKNOWN until further analysis.",
+        };
     }
-  }
-
-  return {
-    technicalImpact: [...new Set(impacts.technicalImpact)].join(" "),
-    dataExposure: [...new Set(impacts.dataExposure)].join(" "),
-    businessImpact: [...new Set(impacts.businessImpact)].join(" "),
-  };
+  });
 }

@@ -1,46 +1,59 @@
-export function generateAttackerView(vulnerabilities, normalizedInput) {
+/**
+ * Generates attacker perspective explanations for each vulnerability.
+ * This is a READ-ONLY, educational simulation.
+ * No real exploitation logic is executed.
+ */
+export function generateAttackerView(vulnerabilities = [], _normalizedInput) {
   return vulnerabilities.map((vuln) => {
-    switch (vuln.type) {
+    const type = vuln?.type || "Unknown";
+
+    switch (type) {
       case "SQL Injection":
         return {
-          vulnerability: vuln.type,
-          entryPoint: "User-controlled input used in SQL query",
+          vulnerability: "SQL Injection",
+          entryPoint: "User-controlled input reaching database queries",
           attackerMindset:
-            "An attacker looks for inputs that directly affect database queries.",
+            "An attacker searches for parameters that influence SQL statements without proper sanitization.",
           abuseLogic:
-            "By manipulating input values, the attacker may alter the intended SQL logic.",
-          potentialGain: "Unauthorized access to database records",
+            "By injecting crafted SQL fragments, the attacker can modify query logic to bypass authentication or extract data.",
+          potentialGain:
+            "Unauthorized access to sensitive database records or full database compromise",
         };
 
       case "Cross-Site Scripting (XSS)":
         return {
-          vulnerability: vuln.type,
-          entryPoint: "Unsanitized user input rendered in the browser",
+          vulnerability: "Cross-Site Scripting (XSS)",
+          entryPoint: "Unsanitized user input rendered in HTML responses",
           attackerMindset:
-            "An attacker searches for places where input is injected into HTML or DOM.",
+            "An attacker looks for places where user input is reflected in the browser without encoding.",
           abuseLogic:
-            "Malicious scripts could be injected to run in another user's browser.",
-          potentialGain: "Session hijacking or credential theft",
+            "Injected JavaScript executes in the victim’s browser, allowing malicious actions under the victim’s session.",
+          potentialGain:
+            "Session hijacking, credential theft, or malicious actions on behalf of the user",
         };
 
       case "Hardcoded Secret":
         return {
-          vulnerability: vuln.type,
-          entryPoint: "Source code or config files",
+          vulnerability: "Hardcoded Secret",
+          entryPoint: "Source code or configuration files",
           attackerMindset:
-            "An attacker looks for exposed credentials in code repositories.",
+            "An attacker scans repositories and builds for embedded credentials.",
           abuseLogic:
-            "Extracted secrets can be reused to access protected services.",
-          potentialGain: "Unauthorized API or system access",
+            "Exposed secrets can be reused to authenticate against internal systems or third-party services.",
+          potentialGain:
+            "Unauthorized access to APIs, databases, or cloud resources",
         };
 
       default:
         return {
-          vulnerability: vuln.type,
-          entryPoint: "Unknown",
-          attackerMindset: "Generic probing for weaknesses",
-          abuseLogic: "Unknown exploitation path",
-          potentialGain: "Unknown",
+          vulnerability: type,
+          entryPoint: "Application surface",
+          attackerMindset:
+            "An attacker probes application behavior to discover unintended functionality.",
+          abuseLogic:
+            "Without clear validation or controls, the weakness may be abused in unexpected ways.",
+          potentialGain:
+            "Unknown impact depending on how the weakness can be exploited",
         };
     }
   });

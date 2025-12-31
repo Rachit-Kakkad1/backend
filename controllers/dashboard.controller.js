@@ -1,9 +1,7 @@
 import Analysis from "../models/Analysis.js";
 
 /**
- * ------------------------------------------------------
  * GET /api/dashboard/metrics
- * ------------------------------------------------------
  */
 export const getDashboardMetrics = async (req, res, next) => {
   try {
@@ -12,7 +10,6 @@ export const getDashboardMetrics = async (req, res, next) => {
     /* ---------------- Total Scans ---------------- */
     const totalScans = await Analysis.countDocuments({ userId });
 
-    /* ---------------- Fetch Analyses ---------------- */
     const analyses = await Analysis.find({ userId }).lean();
 
     const severityDistribution = {
@@ -26,7 +23,8 @@ export const getDashboardMetrics = async (req, res, next) => {
     let totalRiskScore = 0;
 
     analyses.forEach((analysis) => {
-      totalRiskScore += analysis.overallRiskScore || 0;
+      const score = Number(analysis.overallRiskScore) || 0;
+      totalRiskScore += score;
 
       (analysis.vulnerabilities || []).forEach((vuln) => {
         if (severityDistribution[vuln.severity] !== undefined) {
@@ -39,7 +37,7 @@ export const getDashboardMetrics = async (req, res, next) => {
     const averageRiskScore =
       totalScans > 0 ? Math.round(totalRiskScore / totalScans) : 0;
 
-    /* ---------------- Risk Trends (30 Days) ---------------- */
+    /* ---------------- Risk Trends (Last 30 Days) ---------------- */
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -51,11 +49,12 @@ export const getDashboardMetrics = async (req, res, next) => {
       .lean();
 
     const riskTrends = recentAnalyses.map((a) => ({
-      date: a.analysisDate.toISOString().split("T")[0],
-      riskScore: a.overallRiskScore,
+      date: a.analysisDate
+        ? a.analysisDate.toISOString().split("T")[0]
+        : "Unknown",
+      riskScore: Number(a.overallRiskScore) || 0,
     }));
 
-    /* ---------------- Response ---------------- */
     res.status(200).json({
       success: true,
       metrics: {
@@ -63,11 +62,10 @@ export const getDashboardMetrics = async (req, res, next) => {
         totalVulnerabilities,
         averageRiskScore,
         severityDistribution,
-        riskTrends,
+        riskTrends, // REQUIRED by frontend
       },
     });
   } catch (error) {
     next(error);
   }
-  
 };

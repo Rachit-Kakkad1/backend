@@ -5,12 +5,8 @@ import Analysis from "../models/Analysis.js";
 import User from "../models/User.js";
 
 /* ---------------- Security Engine ---------------- */
-import { analyze } from "../security-engine/index.js";
-import { calculateRiskScore } from "../security-engine/riskEngine.js";
-import { generateAttackerView } from "../security-engine/attackerView/attackerView.js";
-import { generateDefenderFixes } from "../security-engine/defenderView/defenderEngine.js";
-import { generateSimulatedPayloads } from "../security-engine/payloads/payloadEngine.js";
-import { generateImpactAnalysis } from "../security-engine/impactEngine.js";
+import { analyzeInput } from "../security-engine/index.js";
+import { normalizeSeverity } from "../security-engine/utils/normalizeSeverity.js";
 
 /* --------------------------------------------------
  * Constants
@@ -24,15 +20,15 @@ const MAX_CONTENT_LENGTH = 100_000;
 const hashContent = (content) =>
   crypto.createHash("sha256").update(content).digest("hex");
 
-/* --------------------------------------------------
+/* ==================================================
  * POST /api/analyze
- * -------------------------------------------------- */
+ * ================================================== */
 export const analyzeCode = async (req, res) => {
   try {
     const { inputType, content } = req.body;
     const userId = req.userId;
 
-    /* ---------------- Auth & Input Validation ---------------- */
+    /* ---------- Auth ---------- */
     if (!userId || !mongoose.Types.ObjectId.isValid(userId)) {
       return res.status(401).json({
         success: false,
@@ -40,6 +36,7 @@ export const analyzeCode = async (req, res) => {
       });
     }
 
+    /* ---------- Input validation ---------- */
     if (!inputType || !content) {
       return res.status(400).json({
         success: false,
@@ -61,89 +58,84 @@ export const analyzeCode = async (req, res) => {
       });
     }
 
-    /* ---------------- Run Security Engine ---------------- */
-    const engineResult = analyze(inputType, content);
-    const vulnerabilities = engineResult.vulnerabilities || [];
+    /* ---------- Run Security Engine ---------- */
+    const engineResult = analyzeInput({ inputType, content });
 
-    const attackerView = generateAttackerView(
-      vulnerabilities,
-      engineResult.normalizedInput
-    );
+    if (!engineResult || engineResult.error) {
+      return res.status(400).json({
+        success: false,
+        message: engineResult?.error || "Analysis failed",
+      });
+    }
 
-    const defenderFixes = generateDefenderFixes(
-      vulnerabilities,
-      engineResult.normalizedInput
-    );
+    const {
+      vulnerabilities = [],
+      riskScore,
+      attackerView = [],
+      defenderFixes = [],
+      payloads = [],
+      impactAnalysis = null,
+      processingTime,
+    } = engineResult;
 
-    const simulatedPayloads = generateSimulatedPayloads(vulnerabilities);
-
-    const impactAnalysis = generateImpactAnalysis(
-      vulnerabilities,
-      engineResult.normalizedInput
-    );
-
-    const overallRiskScore =
-      vulnerabilities.length > 0
-        ? calculateRiskScore(vulnerabilities)
-        : 0;
-
-    /* ---------------- Normalize for DB ---------------- */
+    /* ---------- Normalize for DB ---------- */
     const enrichedVulnerabilities = vulnerabilities.map((v, i) => ({
       id: `vuln-${Date.now()}-${i}`,
       name: v.type,
-      severity: v.severity,
+      severity: normalizeSeverity(v.severity), // 🔑 enum-safe
       description: v.description,
-      attackerLogic: attackerView[i]?.abuseLogic,
-      defenderLogic: defenderFixes[i]?.secureFix,
-      secureCodeFix: defenderFixes[i]?.secureExample,
+      attackerLogic: attackerView[i]?.abuseLogic || null,
+      defenderLogic: defenderFixes[i]?.secureFix || null,
+      secureCodeFix: defenderFixes[i]?.secureExample || null,
     }));
 
-    /* ---------------- Persist Analysis ---------------- */
+    const safeRiskScore = Number.isFinite(riskScore) ? riskScore : 0;
+    const safeProcessingTime = Number(processingTime) || 0;
+
+    /* ---------- Persist ---------- */
     const analysis = await Analysis.create({
       userId,
       inputType,
       contentHash: hashContent(content),
-      overallRiskScore,
+      overallRiskScore: safeRiskScore,
       vulnerabilities: enrichedVulnerabilities,
-      processingTime: engineResult.processingTime || 0,
+      processingTime: safeProcessingTime,
       analysisDate: new Date(),
     });
 
-    /* ---------------- Update User Stats ---------------- */
     await User.updateOne(
       { _id: userId },
       { $inc: { analysisCount: 1 } }
     );
 
-    /* ---------------- Response ---------------- */
-    res.status(200).json({
+    /* ---------- Response ---------- */
+    return res.status(200).json({
       success: true,
       analysis: {
         id: analysis._id,
         inputType,
-        overallRiskScore,
+        overallRiskScore: safeRiskScore,
         vulnerabilities: enrichedVulnerabilities,
         attackerView,
         defenderFixes,
-        simulatedPayloads,
+        simulatedPayloads: payloads,
         impactAnalysis,
         analysisDate: analysis.analysisDate,
-        processingTime: analysis.processingTime,
+        processingTime: safeProcessingTime,
       },
     });
   } catch (error) {
-    console.error("Analysis error:", error.message);
-
-    res.status(500).json({
+    console.error("Analysis error:", error);
+    return res.status(500).json({
       success: false,
       message: "Analysis failed",
     });
   }
 };
 
-/* --------------------------------------------------
+/* ==================================================
  * GET /api/analyze/history
- * -------------------------------------------------- */
+ * ================================================== */
 export const getAnalysisHistory = async (req, res) => {
   try {
     const userId = req.userId;
@@ -169,7 +161,7 @@ export const getAnalysisHistory = async (req, res) => {
       Analysis.countDocuments({ userId }),
     ]);
 
-    res.json({
+    return res.json({
       success: true,
       analyses: analyses.map((a) => ({
         id: a._id,
@@ -186,18 +178,17 @@ export const getAnalysisHistory = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("History fetch error:", error.message);
-
-    res.status(500).json({
+    console.error("History fetch error:", error);
+    return res.status(500).json({
       success: false,
       message: "Failed to fetch analysis history",
     });
   }
 };
 
-/* --------------------------------------------------
+/* ==================================================
  * GET /api/analyze/:id
- * -------------------------------------------------- */
+ * ================================================== */
 export const getAnalysisById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -210,10 +201,7 @@ export const getAnalysisById = async (req, res) => {
       });
     }
 
-    const analysis = await Analysis.findOne({
-      _id: id,
-      userId,
-    }).lean();
+    const analysis = await Analysis.findOne({ _id: id, userId }).lean();
 
     if (!analysis) {
       return res.status(404).json({
@@ -222,7 +210,7 @@ export const getAnalysisById = async (req, res) => {
       });
     }
 
-    res.json({
+    return res.json({
       success: true,
       analysis: {
         id: analysis._id,
@@ -234,9 +222,8 @@ export const getAnalysisById = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Fetch analysis error:", error.message);
-
-    res.status(500).json({
+    console.error("Fetch analysis error:", error);
+    return res.status(500).json({
       success: false,
       message: "Failed to fetch analysis",
     });

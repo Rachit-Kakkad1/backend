@@ -1,19 +1,42 @@
-import normalizeCode from "./code.js";
-import normalizeSQL from "./sql.js";
-import normalizeConfig from "./config.js";
-import normalizeAPI from "./api.js";
+import { normalizeCode } from "./code.js";
+import { normalizeSQL } from "./sql.js";
+import { normalizeConfig } from "./config.js";
+import { normalizeAPI } from "./api.js";
 
-export function normalizeInput(inputType, content) {
+/**
+ * Normalizes user input into a structured format
+ * suitable for static security analysis.
+ */
+export function normalizeInput(inputType, content, language) {
+  const safeContent =
+    typeof content === "string" ? content : String(content ?? "");
+
   switch (inputType) {
     case "code":
-      return normalizeCode(content);
+      return normalizeCode(safeContent, language);
+
     case "sql":
-      return normalizeSQL(content);
+      return normalizeSQL(safeContent);
+
     case "config":
-      return normalizeConfig(content);
+      return normalizeConfig(safeContent);
+
     case "api":
-      return normalizeAPI(content);
+      return normalizeAPI(safeContent);
+
     default:
-      throw new Error("Unsupported input type");
+      return {
+        type: "unknown",
+        raw: safeContent,
+        blocks: [
+          {
+            content: safeContent,
+            location: {
+              line: 1,
+              column: 1,
+            },
+          },
+        ],
+      };
   }
 }

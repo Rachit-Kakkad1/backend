@@ -1,11 +1,22 @@
-export default function normalizeAPI(apiLogic) {
+/**
+ * Normalizes API endpoint input for static security analysis.
+ * This is a read-only normalization step.
+ */
+export function normalizeAPI(content) {
+  const safeContent =
+    typeof content === "string" ? content : String(content ?? "");
+
   return {
     type: "api",
-    metadata: {
-      hasAuth: /auth|jwt|token/i.test(apiLogic),
-      hasValidation: /validate|schema|joi/i.test(apiLogic),
-    },
-    entryPoint: "HTTP Request",
-    logic: apiLogic,
+    raw: safeContent,
+    blocks: [
+      {
+        content: safeContent,
+        location: {
+          line: 1,
+          column: 1,
+        },
+      },
+    ],
   };
 }

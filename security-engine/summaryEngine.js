@@ -1,29 +1,42 @@
-export function generateSummary({
-  vulnerabilities,
-  overallRiskScore,
-  attackerView,
-  defenderFixes,
-  simulatedPayloads,
-  impactAnalysis,
-}) {
-  return {
-    totalVulnerabilities: vulnerabilities.length,
+/**
+ * SUMMARY ENGINE
+ * --------------
+ * Aggregates vulnerability statistics by severity.
+ * Severity values are expected to be ALL CAPS.
+ */
 
-    severityBreakdown: vulnerabilities.reduce((acc, v) => {
-      acc[v.severity] = (acc[v.severity] || 0) + 1;
-      return acc;
-    }, {}),
-
-    overallRiskScore,
-
-    keyFindings: vulnerabilities.map((v) => v.type),
-
-    attackerPerspective: attackerView?.summary || "No attacker path identified",
-
-    defenderRecommendations: defenderFixes?.length || 0,
-
-    businessImpact: impactAnalysis?.businessImpact || "Low",
-
-    generatedAt: new Date().toISOString(),
+export function buildSummary(vulnerabilities = []) {
+  const summary = {
+    total: vulnerabilities.length,
+    CRITICAL: 0,
+    HIGH: 0,
+    MEDIUM: 0,
+    LOW: 0,
   };
+
+  if (!Array.isArray(vulnerabilities)) {
+    return summary;
+  }
+
+  vulnerabilities.forEach((v) => {
+    switch (v?.severity) {
+      case "CRITICAL":
+        summary.CRITICAL++;
+        break;
+      case "HIGH":
+        summary.HIGH++;
+        break;
+      case "MEDIUM":
+        summary.MEDIUM++;
+        break;
+      case "LOW":
+        summary.LOW++;
+        break;
+      default:
+        // ignore unknown severities
+        break;
+    }
+  });
+
+  return summary;
 }
