@@ -1,0 +1,727 @@
+/* src/pages/LandingPage.css */
+
+/* --- CORE & RESET --- */
+/* --- CORE & RESET (DEEP DARK MODE) --- */
+/* --- CORE & RESET (VOID BLACK MODE) --- */
+:root {
+    /* Pure Black Foundation */
+    --bg-dark: #000000; 
+    --primary-blue: #3b82f6;
+    --text-main: #e2e8f0;
+    --text-muted: #475569; 
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    
+    /* Subtle "Event Horizon" Glow */
+    background-image: radial-gradient(
+        circle at 50% -20%, 
+        rgba(29, 78, 216, 0.08) 0%, /* Reduced opacity to 8% */
+        transparent 40%
+    );
+    min-height: 100vh;
+}
+
+/* Interactive elements use default cursor */
+a,
+button,
+input,
+textarea,
+select {
+    cursor: pointer;
+}
+
+/* --- 1. CUSTOM CURSOR (Fixed) --- */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid var(--primary-blue);
+    border-radius: 50%;
+    /* CRITICAL: Allows clicks to pass through the cursor to the button below */
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s;
+    mix-blend-mode: exclusion;
+}
+
+.custom-cursor.hovered {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(59, 130, 246, 0.3);
+    border-color: transparent;
+    backdrop-filter: blur(2px);
+}
+
+/* --- 2. NOISE OVERLAY (Subtle) --- */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.05;
+    pointer-events: none;
+    /* Allows clicks to pass through */
+    z-index: 9000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+/* ============================ */
+/* 🛸 ULTIMATE CYBER HUD NAVBAR */
+/* ============================ */
+
+/* --- CURSOR FIX --- */
+/* We force the cursor to be the highest layer in the universe */
+.custom-cursor {
+  z-index: 99999 !important; 
+}
+
+/* Nav elements use default cursor */
+nav, nav a, nav button {
+  cursor: pointer;
+}
+
+/* --- NAVBAR CONTAINER --- */
+nav {
+  position: fixed;
+  top: 20px;
+  background: rgba(0, 0, 0, 0.95); /* 95% Black */
+border: 1px solid rgba(64, 64, 64, 0.05);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1000px;
+  height: 70px;
+  z-index: 10000; /* Lower than cursor now */
+  
+  /* Deep Space Glass */
+  background: rgba(5, 9, 20, 0.75);
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  
+  /* Shape */
+  border-radius: 16px;
+  
+  /* Entrance Animation */
+  animation: hud-entrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- GLOWING BORDER ANIMATION --- */
+/* This creates a moving colorful border effect */
+nav::before {
+  content: "";
+  position: absolute;
+  inset: -1px; /* Hugs the container */
+  z-index: -1;
+  border-radius: 16px;
+  padding: 1px; /* Thickness of the border */
+  
+  background: linear-gradient(
+    90deg, 
+    transparent 0%, 
+    #3b82f6 40%, 
+    #22d3ee 50%, 
+    #3b82f6 60%, 
+    transparent 100%
+  );
+  
+  /* Mask keeps the center clear so we see the glass */
+  -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  
+  /* Animation */
+  background-size: 200% 100%;
+  animation: border-scan 4s linear infinite;
+  opacity: 0.7;
+}
+
+/* --- INNER LAYOUT --- */
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 32px;
+}
+
+/* --- BRANDING --- */
+.nav-brand {
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+/* Brand glow dot */
+.nav-brand::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  width: 6px;
+  height: 6px;
+  background: #22d3ee;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 8px #22d3ee;
+  animation: pulse-dot 2s infinite;
+}
+
+/* --- LINKS --- */
+.nav-links {
+  display: flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03); /* Subtle pill background */
+  padding: 4px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-links a {
+  position: relative;
+  text-decoration: none;
+  color: #94a3b8;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Link Hover State */
+.nav-links a:hover {
+  color: #fff;
+}
+
+/* The "highlight" that slides behind the text on hover */
+.nav-links a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(59, 130, 246, 0.2); /* Blue highlight */
+  border-radius: 8px;
+  transform: scaleX(0); /* Hidden by default */
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.nav-links a:hover::before {
+  transform: scaleX(1); /* Slide in */
+}
+
+/* --- CTA BUTTON (If you have one) --- */
+.nav-cta {
+  background: #3b82f6 !important;
+  color: white !important;
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes hud-entrance {
+  0% { top: -100px; opacity: 0; }
+  100% { top: 20px; opacity: 1; }
+}
+
+@keyframes border-scan {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+  50% { opacity: 0.5; transform: translateY(-50%) scale(0.8); }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav { width: 95%; top: 15px; }
+  .nav-links { display: none; }
+}
+
+/* --- 4. SCROLL PROGRESS --- */
+.scroll-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #06b6d4, #3B82F6, #8b5cf6);
+    z-index: 10002;
+    /* Above navbar */
+    width: 0%;
+    transition: width 0.1s linear;
+}
+/* --- 5. OBSIDIAN GLASS CARDS --- */
+.glass-card {
+    /* Almost solid black with tiny transparency */
+    background: rgba(8, 8, 8, 0.9); 
+    
+    /* Standard Blur */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Very subtle, sharp border */
+    border: 1px solid rgba(255, 255, 255, 0.05); 
+    
+    /* Deep shadow to lift it off the black void */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 1), 0 20px 40px -10px rgba(0, 0, 0, 1);
+    
+    transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card:hover {
+    /* Border lights up slightly on hover */
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+    transform: translateY(-5px);
+}
+
+/* --- 6. GLITCH TEXT (Clean) --- */
+.glitch-wrapper {
+    display: inline-block;
+    position: relative;
+    color: white;
+}
+
+.glitch-text {
+    position: relative;
+    z-index: 1;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.8;
+    background: transparent;
+}
+
+.glitch-text::before {
+    color: #0ff;
+    z-index: -1;
+    animation: glitch-1 3s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    color: #f0f;
+    z-index: -2;
+    animation: glitch-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-1 {
+    0% {
+        clip-path: inset(20% 0 80% 0);
+        transform: translate(-2px, 0);
+    }
+
+    20% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(2px, 0);
+    }
+
+    100% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(-2px, 0);
+    }
+}
+
+@keyframes glitch-2 {
+    0% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(2px, 0);
+    }
+
+    20% {
+        clip-path: inset(30% 0 20% 0);
+        transform: translate(-2px, 0);
+    }
+
+    100% {
+        clip-path: inset(0% 0 80% 0);
+        transform: translate(-2px, 0);
+    }
+}
+
+/* --- 7. UTILITIES --- */
+.velocity-skew {
+    will-change: transform;
+    transition: transform 0.15s ease-out;
+}
+
+.reveal-mask {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+    filter: blur(5px);
+}
+
+.reveal-mask.active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+/* Aurora Background */
+.aurora-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.3;
+    animation: float 15s infinite ease-in-out alternate;
+    z-index: 0;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+}
+
+/* Marquee */
+.marquee-container {
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    overflow: hidden;
+    user-select: none;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 4rem;
+    padding: 1.5rem 0;
+    animation: marquee-scroll 40s linear infinite;
+    min-width: 100%;
+}
+
+@keyframes marquee-scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.faq-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* --- HOLOGRAPHIC CARD SHIMMER --- */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: 0.5s;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.glass-card:hover::before {
+  left: 100%;
+  transition: 0.5s;
+}
+
+/* --- ANIMATED GRADIENT TEXT --- */
+.text-gradient-flow {
+  background: linear-gradient(
+    300deg,
+    #3b82f6, /* Blue */
+    #22d3ee, /* Cyan */
+    #8b5cf6, /* Purple */
+    #3b82f6  /* Blue again to loop smoothly */
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textFlow 4s linear infinite;
+}
+
+@keyframes textFlow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* --- NEON PULSE --- */
+.neon-pulse {
+  box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* --- MOVING CYBER GRID --- */
+.cyber-grid {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  transform: perspective(500px) rotateX(60deg);
+  animation: grid-move 20s linear infinite;
+  z-index: -1; /* Behind everything */
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+@keyframes grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+/* ========================================= */
+/* 💾 NEW INFO SECTIONS (Terminal, Stats)    */
+/* ========================================= */
+
+/* --- 1. NEON STATS GRID --- */
+.stats-grid {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  padding: 80px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.4);
+  margin-top: 40px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(180deg, #fff, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.stat-label {
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  margin-top: 10px;
+}
+
+/* --- 2. INFO CARDS CONTAINER --- */
+.info-section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.info-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.info-card {
+  padding: 40px;
+  border-radius: 20px;
+  /* Uses your existing .glass-card styles automatically */
+}
+
+.icon-box {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 14px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+.info-card h4 {
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  color: #fff;
+}
+
+.info-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+/* --- 3. TERMINAL WIDGET --- */
+.terminal-section {
+  padding: 80px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.terminal-loader {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #050505;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.terminal-header {
+  background: #111;
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control { width: 12px; height: 12px; border-radius: 50%; }
+.close { background: #ff5f56; }
+.minimize { background: #ffbd2e; }
+.maximize { background: #27c93f; }
+
+.terminal-title {
+  margin-left: 16px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.terminal-content {
+  padding: 24px;
+  color: #a9b7c6;
+  line-height: 1.5;
+}
+
+.terminal-content .text { margin-bottom: 8px; }
+.highlight { color: #3b82f6; }
+.success { color: #22c55e; }
+
+.typing-effect {
+  border-right: 2px solid #3b82f6;
+  width: fit-content;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { border-color: transparent; } }
+
+/* Mobile Adjustment */
+@media (max-width: 768px) {
+  .stats-grid { flex-direction: column; gap: 40px; }
+  .stat-number { font-size: 2.5rem; }
+}
+
+/* --- ARCHITECTURE ARROWS --- */
+.architecture-arrow {
+  animation: arrow-pulse 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6));
+}
+
+@keyframes arrow-pulse {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: translateX(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+/* Vertical arrow for mobile */
+.architecture-arrow-vertical {
+  animation: arrow-pulse-vertical 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.6));
+}
+
+@keyframes arrow-pulse-vertical {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: translateY(0);
+  }
+  50% { 
+    opacity: 1;
+    transform: translateY(4px);
+  }
+}

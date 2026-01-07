@@ -1,0 +1,88 @@
+{"ts":"2026-01-07T03:51:47.620Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T03:51:47.632Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:51:47.632Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:51:47.633Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI execution blocked: authoritative findings missing"}
+{"ts":"2026-01-07T03:52:08.609Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T03:52:08.614Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:52:08.614Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:52:57.175Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:56:34.812Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T03:56:34.815Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:56:34.816Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:57:13.023Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:58:50.307Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T03:58:50.311Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:58:50.311Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T03:59:23.956Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:00:58.605Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:00:58.608Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:00:58.608Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:01:39.963Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:03:39.002Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:03:39.005Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:03:39.006Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:04:17.425Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:05:31.039Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:05:31.043Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:05:31.043Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:06:07.544Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:08:04.557Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:08:04.560Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:08:04.560Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:08:52.697Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:10:43.329Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:10:43.330Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:10:43.331Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI execution blocked: authoritative findings missing"}
+{"ts":"2026-01-07T04:14:56.625Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:15:51.093Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:15:51.094Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:15:51.094Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI execution blocked: authoritative findings missing"}
+{"ts":"2026-01-07T04:22:35.622Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:22:35.622Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:22:35.623Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI execution blocked: authoritative findings missing"}
+{"ts":"2026-01-07T04:23:36.132Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:23:36.133Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:23:36.134Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI execution blocked: authoritative findings missing"}
+{"ts":"2026-01-07T04:24:17.852Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:29:34.179Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:29:34.183Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:29:34.184Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:29:34.184Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T04:30:34.253Z","stage":"ai_request_failed","errorType":"unknown","message":"timeout of 60000ms exceeded","durationMs":60047}
+{"ts":"2026-01-07T04:30:34.253Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI request failed: timeout of 60000ms exceeded"}
+{"ts":"2026-01-07T04:34:15.873Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:34:15.873Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:34:15.874Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T04:35:08.733Z","stage":"ai_request_success","status":200,"durationMs":52859}
+{"ts":"2026-01-07T04:35:08.736Z","stage":"ai_parse_failed","error":"Unexpected token 'H', \"Here is th\"... is not valid JSON","rawSnippet":"Here is the output:\n\n{\n  \"explanation\": {\n    \"summary\": \"This code contains a suspicious console me"}
+{"ts":"2026-01-07T04:35:08.737Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:36:27.516Z","stage":"mode_decision","useAI":false,"mode":"SECURITY_ONLY"}
+{"ts":"2026-01-07T04:36:33.342Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:36:33.343Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T04:36:33.344Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T04:37:12.025Z","stage":"ai_request_success","status":200,"durationMs":38681}
+{"ts":"2026-01-07T04:37:12.026Z","stage":"ai_parse_failed","error":"Unexpected token 'H', \"Here is th\"... is not valid JSON","rawSnippet":"Here is the output:\n\n{\n    \"explanation\": {\n        \"summary\": \"The provided code snippet contains a"}
+{"ts":"2026-01-07T04:37:12.027Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T05:48:31.738Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T05:48:31.739Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T05:48:31.741Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T05:49:31.775Z","stage":"ai_request_failed","errorType":"unknown","message":"timeout of 60000ms exceeded","durationMs":60034}
+{"ts":"2026-01-07T05:49:31.776Z","stage":"ai_execute_error","useAI":true,"mode":"SECURITY_PLUS_AI","error":"AI request failed: timeout of 60000ms exceeded"}
+{"ts":"2026-01-07T05:52:58.208Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T05:52:58.209Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T05:52:58.209Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T05:53:49.298Z","stage":"ai_request_success","status":200,"durationMs":51089}
+{"ts":"2026-01-07T05:53:49.300Z","stage":"ai_parse_failed","error":"Unexpected token 'H', \"Here is th\"... is not valid JSON","rawSnippet":"Here is the output in JSON format:\n\n{\n  \"explanation\": {\n    \"summary\": \"This code contains a suspic"}
+{"ts":"2026-01-07T05:53:49.301Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:21:45.517Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:21:46.494Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:21:46.495Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T06:22:41.844Z","stage":"ai_request_success","status":200,"durationMs":55348}
+{"ts":"2026-01-07T06:22:41.847Z","stage":"ai_parse_failed","error":"Unexpected token 'H', \"Here is th\"... is not valid JSON","rawSnippet":"Here is the output:\n\n{\n  \"explanation\": {\n    \"summary\": \"The provided code contains a suspicious co"}
+{"ts":"2026-01-07T06:22:41.847Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:23:08.632Z","stage":"mode_decision","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:23:08.633Z","stage":"ai_execute_attempt","useAI":true,"mode":"SECURITY_PLUS_AI"}
+{"ts":"2026-01-07T06:23:08.633Z","stage":"ai_request_start","url":"http://127.0.0.1:5050/v1/chat/completions","model":"llama-3-8b-lexi-uncensored","useAI":true}
+{"ts":"2026-01-07T06:23:51.988Z","stage":"ai_request_success","status":200,"durationMs":43355}
+{"ts":"2026-01-07T06:23:51.990Z","stage":"ai_parse_failed","error":"Unexpected token 'H', \"Here is th\"... is not valid JSON","rawSnippet":"Here is the output:\n\n{\n  \"explanation\": {\n    \"summary\": \"The code contains a suspicious console met"}
+{"ts":"2026-01-07T06:23:51.990Z","stage":"ai_execute_success","useAI":true,"mode":"SECURITY_PLUS_AI"}

@@ -1,0 +1,121 @@
+/* src/pages/LoginPage.css */
+
+/* --- 1. ANIMATED BACKGROUND GRID --- */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+  animation: grid-pan 20s linear infinite;
+}
+
+@keyframes grid-pan {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+
+
+
+
+@keyframes scan {
+  0%, 100% { top: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+@keyframes scan-overlay {
+  0%, 100% { top: -20%; }
+  100% { top: 120%; }
+}
+
+/* --- 3. HOLOGRAPHIC SPIN --- */
+.holo-spin {
+  animation: spin-slow 10s linear infinite;
+}
+.holo-spin-reverse {
+  animation: spin-slow 15s linear infinite reverse;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- 4. GLITCH TEXT EFFECT --- */
+.glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0B0F19; /* Match card bg */
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(-2px, 0);
+  opacity: 0;
+  animation: glitch-anim 2.5s infinite linear alternate-reverse;
+}
+
+.glitch-layer:nth-child(2) {
+  color: #3b82f6;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  transform: translate(2px, 0);
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { opacity: 0; }
+  2% { opacity: 1; transform: translate(-2px, 0); }
+  4% { opacity: 0; transform: translate(0, 0); }
+}
+
+/* --- 5. PULSING DOTS --- */
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* --- CURSOR FIXES --- */
+
+/* 1. Show default cursor on the whole page */
+.min-h-screen {
+  cursor: default;
+}
+
+/* 2. Style the Custom Cursor */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid #3b82f6; /* Blue border */
+  border-radius: 50%;
+  pointer-events: none; /* Allows clicking through it */
+  z-index: 99999; /* On top of everything */
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  mix-blend-mode: exclusion;
+}
+
+/* 3. Hover State (Expands when over buttons) */
+.custom-cursor.hovered {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(59, 130, 246, 0.2);
+  border-color: transparent;
+  backdrop-filter: blur(2px);
+}

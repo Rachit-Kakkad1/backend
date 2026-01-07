@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrolling for the whole app */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  /* Modern SaaS Palette (Finfoco/Boltshift Style) */
+  --cyber-black: 6 8 14;
+  --cyber-dark: 12 16 26;
+  
+  --cyber-blue: 37 99 235;      /* Blue 600 - Primary Accent */
+  --cyber-purple: 29 78 216;    /* Blue 700 - Secondary Accent */
+  --cyber-green: 16 185 129;  /* Emerald 500 - Success Status */
+  --cyber-cyan: 6 182 212;
+  --cyber-indigo: 79 70 229;
+  --cyber-amber: 245 158 11;
+  --cyber-rose: 244 63 94;
+  --cyber-orange: 234 88 12;
+  --cyber-yellow: 234 179 8;
+  --cyber-teal: 20 184 166;
+  --cyber-pink: 236 72 153;
+  
+  --cyber-slate: 148 163 184; /* Slate 400 - Muted Text */
+  --cyber-white: 248 250 252; /* Slate 50 - High Contrast Text */
+  
+  --glow-opacity: 0.04;       /* Softer ambient glows */
+}
+
+
+body {
+  background-color: rgb(var(--cyber-black));
+  color: rgb(var(--cyber-white));
+  @apply antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  letter-spacing: -0.011em;
+}
+
+
+
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 1px solid rgb(var(--cyber-blue) / 0.3);
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+
+.group:hover .hud-corner {
+  border-color: rgb(var(--cyber-blue) / 0.8);
+}
+
+.hud-tl {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.hud-tr {
+  top: 0;
+  right: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.hud-bl {
+  bottom: 0;
+  left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+.hud-br {
+  bottom: 0;
+  right: 0;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* Global Professional Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-white/5 border-4 border-solid border-cyber-black rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/10;
+}
