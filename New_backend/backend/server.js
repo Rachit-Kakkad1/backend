@@ -30,6 +30,9 @@ dotenv.config();
 
 const app = express();
 
+// Trust first proxy (Render) for correct client IP detection
+app.set('trust proxy', 1);
+
 /* -------------------- Security Middleware -------------------- */
 app.use(helmet());
 
