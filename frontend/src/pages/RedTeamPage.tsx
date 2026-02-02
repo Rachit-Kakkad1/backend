@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Target, Zap, Bug, Code, TrendingUp, AlertCircle, Activity, Shield, Smartphone, Globe, Mail, Radio } from 'lucide-react';
+import { Target, Zap, Bug, Code, TrendingUp, AlertCircle, Activity, Shield, Smartphone, Mail, Radio } from 'lucide-react';
 import { DashboardLayout } from '../components/DashboardLayout';
 import { GlassCard } from '../components/GlassCard';
 import { RedTeamPulse } from '../components/RedTeamPulse';
@@ -70,11 +70,11 @@ export const RedTeamPage = () => {
 
           {/* Active Operations Indicator */}
           <div className="flex items-center space-x-3 bg-black/20 px-4 py-2 rounded-full border border-red-500/10 backdrop-blur-sm">
-             <div className="text-right hidden sm:block">
-               <div className="text-xs font-bold text-red-500 tracking-wider">ACTIVE OPS</div>
-               <div className="text-[10px] text-red-400/60 font-mono">NET-MONITORING</div>
-             </div>
-             <RedTeamPulse />
+            <div className="text-right hidden sm:block">
+              <div className="text-xs font-bold text-red-500 tracking-wider">ACTIVE OPS</div>
+              <div className="text-[10px] text-red-400/60 font-mono">NET-MONITORING</div>
+            </div>
+            <RedTeamPulse />
           </div>
         </div>
 
@@ -97,9 +97,9 @@ export const RedTeamPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => { 
-                setTeam('blue'); 
-                navigate('/blue-team'); 
+              onClick={() => {
+                setTeam('blue');
+                navigate('/blue-team');
               }}
               className="px-4 py-2 bg-cyber-blue/20 border border-cyber-blue/50 rounded-lg text-sm font-bold text-cyber-blue hover:bg-cyber-blue/30 hover:border-cyber-blue/70 transition-all shadow-[0_0_10px_rgba(59,130,246,0.3)] flex items-center space-x-2"
             >
@@ -120,11 +120,10 @@ export const RedTeamPage = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-6 py-3 font-bold text-sm transition-all ${
-                activeTab === tab.id
+              className={`px-6 py-3 font-bold text-sm transition-all ${activeTab === tab.id
                   ? 'text-red-400 border-b-2 border-red-400'
                   : 'text-cyber-slate hover:text-cyber-white'
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -168,11 +167,10 @@ export const RedTeamPage = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-bold text-cyber-white">{attack.type}</span>
-                      <span className={`text-xs px-2 py-1 rounded ${
-                        attack.status === 'Successful' || attack.status === 'Exploited'
+                      <span className={`text-xs px-2 py-1 rounded ${attack.status === 'Successful' || attack.status === 'Exploited'
                           ? 'bg-red-500/20 text-red-400'
                           : 'bg-gray-500/20 text-gray-400'
-                      }`}>
+                        }`}>
                         {attack.status}
                       </span>
                     </div>
@@ -230,7 +228,7 @@ export const RedTeamPage = () => {
                 </div>
                 <span className="px-2 py-1 bg-orange-500/20 text-orange-400 text-xs font-bold rounded">Active</span>
               </div>
-              
+
               <div className="space-y-3 mb-4">
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
@@ -239,7 +237,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Static & dynamic analysis of mobile applications</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Reverse Engineering</span>
@@ -247,7 +245,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Decompile and analyze app binaries</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Network Interception</span>
@@ -280,7 +278,7 @@ export const RedTeamPage = () => {
                 </div>
                 <span className="px-2 py-1 bg-red-500/20 text-red-400 text-xs font-bold rounded">Active</span>
               </div>
-              
+
               <div className="space-y-3 mb-4">
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
@@ -289,7 +287,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Overwhelm target with high traffic volume</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Protocol Attacks</span>
@@ -297,7 +295,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Exploit network protocol weaknesses</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Application Layer</span>
@@ -330,7 +328,7 @@ export const RedTeamPage = () => {
                 </div>
                 <span className="px-2 py-1 bg-yellow-500/20 text-yellow-400 text-xs font-bold rounded">Active</span>
               </div>
-              
+
               <div className="space-y-3 mb-4">
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
@@ -339,7 +337,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Create and send phishing email templates</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Landing Pages</span>
@@ -347,7 +345,7 @@ export const RedTeamPage = () => {
                   </div>
                   <p className="text-xs text-cyber-slate">Build convincing phishing landing pages</p>
                 </div>
-                
+
                 <div className="p-3 bg-white/5 rounded-lg border border-white/5">
                   <div className="flex items-center justify-between mb-1">
                     <span className="text-sm font-bold text-cyber-white">Credential Harvesting</span>

@@ -13,12 +13,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
   RadialBarChart,
   RadialBar,
-  LineChart,
-  Line,
 } from 'recharts';
 
 interface GraphNode {
@@ -191,7 +188,6 @@ export const CodeAnalysisGraph: React.FC<CodeAnalysisGraphProps> = ({
               <RadialBar
                 dataKey="value"
                 cornerRadius={10}
-                fill={(entry: any) => entry.fill}
               />
               <text
                 x="50%"
@@ -221,7 +217,7 @@ export const CodeAnalysisGraph: React.FC<CodeAnalysisGraphProps> = ({
             <div className="text-2xl font-black text-green-400">{safePercentage.toFixed(0)}%</div>
             <div className="text-[10px] text-gray-400 uppercase tracking-wider mt-1">Safe</div>
           </div>
-          <div className="text-center p-3 rounded-lg border" style={{ 
+          <div className="text-center p-3 rounded-lg border" style={{
             backgroundColor: `${riskLevel.color}10`,
             borderColor: `${riskLevel.color}40`
           }}>
@@ -246,7 +242,7 @@ export const CodeAnalysisGraph: React.FC<CodeAnalysisGraphProps> = ({
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ name, percent = 0 }) => `${name}: ${(percent * 100).toFixed(0)}%`}
                 outerRadius={100}
                 fill="#8884d8"
                 dataKey="value"

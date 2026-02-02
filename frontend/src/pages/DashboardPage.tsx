@@ -93,7 +93,7 @@ export const DashboardPage = () => {
 
   // --- REAL DATA STATE ---
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [_loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   // --- SIMULATED LIVE STATE ---
@@ -165,37 +165,21 @@ export const DashboardPage = () => {
     ]);
   };
 
- // --- SAFETY CHECKS ---
-const safeStats = {
-  totalScans: metrics?.totalScans || 0,
-  totalVulnerabilities: metrics?.totalVulnerabilities || 0,
-  severity: metrics?.severityDistribution || {
-    Low: 0,
-    Medium: 0,
-    High: 0,
-    Critical: 0,
-  },
-  riskTrends: metrics?.riskTrends || [],
-};
+  // --- SAFETY CHECKS ---
+  const safeStats = {
+    totalScans: metrics?.totalScans || 0,
+    totalVulnerabilities: metrics?.totalVulnerabilities || 0,
+    severity: metrics?.severityDistribution || {
+      Low: 0,
+      Medium: 0,
+      High: 0,
+      Critical: 0,
+    },
+    riskTrends: metrics?.riskTrends || [],
+  };
 
-// 🔥 ADD YOUR CODE RIGHT HERE
-const totalVulns = safeStats.totalVulnerabilities;
-
-const severityCounts = {
-  LOW: safeStats.severity.Low,
-  MEDIUM: safeStats.severity.Medium,
-  HIGH: safeStats.severity.High,
-  CRITICAL: safeStats.severity.Critical,
-};
-
-const atRiskCount =
-  severityCounts.HIGH + severityCounts.CRITICAL;
-
-const atRiskPercent =
-  totalVulns === 0
-    ? 0
-    : Math.round((atRiskCount / totalVulns) * 100);
-
+  // Derived stats for display
+  const totalVulns = safeStats.totalVulnerabilities;
 
   // Calculate Risk Score Safely
   const currentRiskScore =
@@ -376,8 +360,8 @@ const atRiskPercent =
                           initial={{ width: 0 }}
                           animate={{
                             width: `${totalVulns === 0
-                                ? 0
-                                : Math.round((bar.val / totalVulns) * 100)
+                              ? 0
+                              : Math.round((bar.val / totalVulns) * 100)
                               }%`,
 
                           }}

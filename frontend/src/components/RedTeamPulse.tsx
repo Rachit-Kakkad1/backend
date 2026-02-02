@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 
 export const RedTeamPulse = () => {
@@ -10,7 +9,7 @@ export const RedTeamPulse = () => {
         animate={{ rotate: 360 }}
         transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
       />
-      
+
       {/* Middle Pulsing Ring */}
       <motion.div
         className="absolute w-8 h-8 border border-red-500/50 rounded-full"
@@ -20,7 +19,7 @@ export const RedTeamPulse = () => {
 
       {/* Inner Core */}
       <div className="w-2 h-2 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.8)]" />
-      
+
       {/* Optional: "Active" Text label next to it? 
           User asked for "Small, non-distracting". 
           Let's keep it just the graphic for now as it's cleaner.

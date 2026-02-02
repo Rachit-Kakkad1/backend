@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Globe, 
-  Database, 
-  Cpu, 
-  Brain, 
-  TestTube, 
-  Repeat, 
-  BarChart2, 
-  GraduationCap, 
-  Briefcase, 
+import {
+  Globe,
+  Database,
+  Brain,
+  TestTube,
+  Repeat,
+  BarChart2,
+  GraduationCap,
+  Briefcase,
   BookOpen,
   ChevronRight,
   Sparkles
@@ -120,12 +119,12 @@ const scopes = [
 ];
 
 export const FutureScopeSection = () => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [_hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
     <section id="roadmap" className="py-32 px-6 border-t border-white/5 bg-[#0B0F19] relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none" />
-      
+
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="mb-20 text-center velocity-skew">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-xs font-mono mb-4">

@@ -150,3 +150,37 @@ export interface AnalysisResult {
     }>;
   };
 }
+
+// ==================================================
+// EthicalNotice (for EthicalBanner)
+// ==================================================
+export interface EthicalNotice {
+  title: string;
+  content: string;
+}
+
+// ==================================================
+// AnalysisHistoryItem (for history listing)
+// ==================================================
+export interface AnalysisHistoryItem {
+  id: string;
+  inputType: InputType;
+  analysisDate: string;
+  overallRiskScore: number;
+  vulnerabilityCount: number;
+}
+
+// ==================================================
+// DashboardMetrics
+// ==================================================
+export interface DashboardMetrics {
+  totalScans: number;
+  totalVulnerabilities: number;
+  severityDistribution: {
+    Low: number;
+    Medium: number;
+    High: number;
+    Critical: number;
+  };
+  riskTrends: Array<{ date: string; riskScore: number }>;
+}

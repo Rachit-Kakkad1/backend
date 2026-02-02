@@ -177,7 +177,7 @@ const LandingPage: React.FC = () => {
     useEffect(() => {
         const text = `> INITIATING_ThreatLens_CORE...\n> SCANNING_DEPENDENCY_TREE...\n> [!] CRITICAL_VULN_FOUND: CVE-2024-3801\n> APPLYING_HOTFIX_PATCH...\n> SYSTEM_SECURE.`;
         let i = 0;
-        let timeout: NodeJS.Timeout;
+        let timeout: ReturnType<typeof setTimeout>;
         const type = () => {
             if (i < text.length) {
                 setTypedText(prev => prev + text.charAt(i));
@@ -268,8 +268,8 @@ const LandingPage: React.FC = () => {
                     </p>
 
                     <div className="reveal-mask flex flex-col sm:flex-row gap-6 justify-center">
-                        <button 
-                            onClick={() => navigate('/blue-team')} 
+                        <button
+                            onClick={() => navigate('/blue-team')}
                             className="group relative px-10 py-5 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-500 hover:scale-105 transition-all overflow-hidden cursor-pointer shadow-[0_0_30px_rgba(37,99,235,0.5)]"
                         >
                             <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-500 opacity-0 group-hover:opacity-30 transition-opacity" />
@@ -279,7 +279,7 @@ const LandingPage: React.FC = () => {
                             </div>
                             <div className="absolute bottom-0 left-0 right-0 h-1 bg-blue-400/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
                         </button>
-                        <button 
+                        <button
                             onClick={() => navigate('/red-team')}
                             className="group relative px-10 py-5 bg-red-600 text-white font-bold rounded-lg hover:bg-red-500 hover:scale-105 transition-all overflow-hidden cursor-pointer shadow-[0_0_30px_rgba(239,68,68,0.5)]"
                         >
@@ -355,8 +355,8 @@ const LandingPage: React.FC = () => {
                                             <div className="text-[10px] font-mono text-blue-300 mb-2 text-center">
                                                 CODE_ANALYSIS_GRAPH
                                             </div>
-                                            <CodeAnalysisGraph 
-                                                width={400} 
+                                            <CodeAnalysisGraph
+                                                width={400}
                                                 height={280}
                                             />
                                         </div>
@@ -413,17 +413,17 @@ const LandingPage: React.FC = () => {
                                     {/* Arrow between steps - only show if not last */}
                                     {i < 3 && (
                                         <div className="flex items-center justify-center architecture-arrow">
-                                            <svg 
-                                                className="w-12 h-12 text-blue-500" 
-                                                fill="none" 
-                                                stroke="currentColor" 
+                                            <svg
+                                                className="w-12 h-12 text-blue-500"
+                                                fill="none"
+                                                stroke="currentColor"
                                                 viewBox="0 0 24 24"
                                             >
-                                                <path 
-                                                    strokeLinecap="round" 
-                                                    strokeLinejoin="round" 
-                                                    strokeWidth={2.5} 
-                                                    d="M13 7l5 5m0 0l-5 5m5-5H6" 
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2.5}
+                                                    d="M13 7l5 5m0 0l-5 5m5-5H6"
                                                 />
                                             </svg>
                                         </div>
@@ -443,17 +443,17 @@ const LandingPage: React.FC = () => {
                                     {/* Vertical arrow between steps - only show if not last */}
                                     {i < 3 && (
                                         <div className="flex items-center justify-center py-2 architecture-arrow-vertical">
-                                            <svg 
-                                                className="w-8 h-8 text-blue-500" 
-                                                fill="none" 
-                                                stroke="currentColor" 
+                                            <svg
+                                                className="w-8 h-8 text-blue-500"
+                                                fill="none"
+                                                stroke="currentColor"
                                                 viewBox="0 0 24 24"
                                             >
-                                                <path 
-                                                    strokeLinecap="round" 
-                                                    strokeLinejoin="round" 
-                                                    strokeWidth={2.5} 
-                                                    d="M19 14l-5 5m0 0l-5-5m5 5V6" 
+                                                <path
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                    strokeWidth={2.5}
+                                                    d="M19 14l-5 5m0 0l-5-5m5 5V6"
                                                 />
                                             </svg>
                                         </div>

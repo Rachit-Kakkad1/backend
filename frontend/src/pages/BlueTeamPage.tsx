@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Lock, Eye, FileCheck, Network, AlertTriangle, CheckCircle, XCircle, Target, ChevronDown, Menu, X, Scan, Activity, FileText, Settings, Zap } from 'lucide-react';
 import { DashboardLayout } from '../components/DashboardLayout';
@@ -15,31 +15,31 @@ export const BlueTeamPage = () => {
 
   // Menu items with icons
   const menuItems = [
-    { 
-      id: 'scan', 
-      label: 'Scan Network', 
-      icon: Scan, 
+    {
+      id: 'scan',
+      label: 'Scan Network',
+      icon: Scan,
       description: 'Perform network vulnerability scan',
       color: 'text-cyber-blue'
     },
-    { 
-      id: 'monitor', 
-      label: 'Start Monitoring', 
-      icon: Activity, 
+    {
+      id: 'monitor',
+      label: 'Start Monitoring',
+      icon: Activity,
       description: 'Enable real-time threat monitoring',
       color: 'text-cyber-green'
     },
-    { 
-      id: 'report', 
-      label: 'Generate Report', 
-      icon: FileText, 
+    {
+      id: 'report',
+      label: 'Generate Report',
+      icon: FileText,
       description: 'Create security assessment report',
       color: 'text-cyber-purple'
     },
-    { 
-      id: 'settings', 
-      label: 'Defense Settings', 
-      icon: Settings, 
+    {
+      id: 'settings',
+      label: 'Defense Settings',
+      icon: Settings,
       description: 'Configure defense systems',
       color: 'text-cyber-amber'
     },
@@ -149,18 +149,17 @@ export const BlueTeamPage = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={toggleMenu}
-                className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center space-x-2 relative overflow-hidden ${
-                  menuOpen 
-                    ? 'bg-cyber-blue/20 border-2 border-cyber-blue/50 text-cyber-blue shadow-[0_0_20px_rgba(59,130,246,0.4)]' 
+                className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center space-x-2 relative overflow-hidden ${menuOpen
+                    ? 'bg-cyber-blue/20 border-2 border-cyber-blue/50 text-cyber-blue shadow-[0_0_20px_rgba(59,130,246,0.4)]'
                     : 'bg-white/5 border border-white/10 text-cyber-white hover:bg-white/10 hover:border-white/20'
-                }`}
+                  }`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyber-blue/10 via-transparent to-cyber-blue/10 opacity-0 hover:opacity-100 transition-opacity" />
                 <Menu size={18} className="relative z-10" />
                 <span className="relative z-10">Menu</span>
-                <ChevronDown 
-                  size={16} 
-                  className={`relative z-10 transition-transform duration-300 ${menuOpen ? 'rotate-180' : ''}`} 
+                <ChevronDown
+                  size={16}
+                  className={`relative z-10 transition-transform duration-300 ${menuOpen ? 'rotate-180' : ''}`}
                 />
               </motion.button>
 
@@ -170,7 +169,7 @@ export const BlueTeamPage = () => {
                     initial={{ opacity: 0, y: -10, scale: 0.98 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.98 }}
-                    transition={{ 
+                    transition={{
                       duration: 0.15,
                       ease: [0.16, 1, 0.3, 1] // Custom cubic-bezier for smooth animation
                     }}
@@ -204,7 +203,7 @@ export const BlueTeamPage = () => {
                             key={item.id}
                             initial={{ opacity: 0, x: -5 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ 
+                            transition={{
                               delay: index * 0.03,
                               duration: 0.2,
                               ease: "easeOut"
@@ -230,9 +229,9 @@ export const BlueTeamPage = () => {
                                   {item.description}
                                 </p>
                               </div>
-                              <ChevronDown 
-                                size={14} 
-                                className="text-cyber-slate group-hover:text-cyber-blue transform -rotate-90 transition-colors" 
+                              <ChevronDown
+                                size={14}
+                                className="text-cyber-slate group-hover:text-cyber-blue transform -rotate-90 transition-colors"
                               />
                             </div>
                           </motion.button>
@@ -262,9 +261,9 @@ export const BlueTeamPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => { 
-                setTeam('red'); 
-                navigate('/red-team'); 
+              onClick={() => {
+                setTeam('red');
+                navigate('/red-team');
               }}
               className="px-4 py-2 bg-red-500/20 border border-red-500/50 rounded-lg text-sm font-bold text-red-400 hover:bg-red-500/30 hover:border-red-500/70 transition-all shadow-[0_0_10px_rgba(239,68,68,0.3)] flex items-center space-x-2"
             >
@@ -285,11 +284,10 @@ export const BlueTeamPage = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-6 py-3 font-bold text-sm transition-all ${
-                activeTab === tab.id
+              className={`px-6 py-3 font-bold text-sm transition-all ${activeTab === tab.id
                   ? 'text-cyber-blue border-b-2 border-cyber-blue'
                   : 'text-cyber-slate hover:text-cyber-white'
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -333,11 +331,10 @@ export const BlueTeamPage = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-bold text-cyber-white">{threat.type}</span>
-                      <span className={`text-xs px-2 py-1 rounded ${
-                        threat.severity === 'Critical' ? 'bg-red-500/20 text-red-400' :
-                        threat.severity === 'High' ? 'bg-orange-500/20 text-orange-400' :
-                        'bg-yellow-500/20 text-yellow-400'
-                      }`}>
+                      <span className={`text-xs px-2 py-1 rounded ${threat.severity === 'Critical' ? 'bg-red-500/20 text-red-400' :
+                          threat.severity === 'High' ? 'bg-orange-500/20 text-orange-400' :
+                            'bg-yellow-500/20 text-yellow-400'
+                        }`}>
                         {threat.severity}
                       </span>
                     </div>

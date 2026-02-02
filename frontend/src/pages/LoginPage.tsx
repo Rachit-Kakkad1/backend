@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "@react-oauth/google";
 import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
-import { ShieldCheck, Lock, Cpu, Activity, Zap, Terminal } from "lucide-react";
+import { ShieldCheck, Lock, Cpu, Activity, Zap } from "lucide-react";
 import { GlassCard } from "../components/GlassCard";
 import "./LoginPage.css";
 

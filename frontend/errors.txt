@@ -1,0 +1,1 @@
+﻿src/pages/DashboardPage.tsx(184,9): error TS6133: 'severityCounts' is declared but its value is never read.

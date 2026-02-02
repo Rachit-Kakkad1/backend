@@ -90,11 +90,11 @@ const ChatbotWidget: React.FC = () => {
             setTogglePos({ left: newLeft, top: newTop });
         };
 
-        const onUp = (ev?: PointerEvent) => {
+        const onUp = (_ev?: PointerEvent) => {
             setIsDragging(false);
             dragState.current = null;
             // persist
-            try { localStorage.setItem('chatbot-toggle-pos', JSON.stringify(togglePosRef.current)); } catch {}
+            try { localStorage.setItem('chatbot-toggle-pos', JSON.stringify(togglePosRef.current)); } catch { }
         };
 
         window.addEventListener('pointermove', onMove);
@@ -141,14 +141,14 @@ const ChatbotWidget: React.FC = () => {
                 "Could you clarify what you mean?"
             ];
             const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            
+
             const newBotMessage: Message = {
                 id: Date.now() + 1,
                 text: randomResponse,
                 sender: 'bot',
                 timestamp: `${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2, '0')}`
             };
-            
+
             setMessages(prev => [...prev, newBotMessage]);
         }, 1000);
     };
